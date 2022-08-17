@@ -1,0 +1,16 @@
+From 1 moved to 3
+From 1 moved to 2
+From 3 moved to 2
+From 1 moved to 3
+From 2 moved to 1
+From 2 moved to 3
+From 1 moved to 3
+From 1 moved to 2
+From 3 moved to 2
+From 3 moved to 1
+From 2 moved to 1
+From 3 moved to 2
+From 1 moved to 3
+From 1 moved to 2
+From 3 moved to 2
+Solved in 15 moves
