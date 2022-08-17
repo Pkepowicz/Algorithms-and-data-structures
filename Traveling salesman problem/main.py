@@ -45,10 +45,17 @@ class map:
 
 m = map("TSP.txt")
 route, lenght = m.simple_route()
-for i in range(len(route)):
-    print(route[i], ' => ', end='')
-print('\n', lenght)
+file = open("simple_route.txt", "w")
+file.write("Length: " + str(lenght) + '\n')
+for i in range(len(route) - 1):
+    file.write(str(route[i]) + ' => ')
+file.write(str(route[-1]))
+file.close()
+
 route, lenght = m.planned_route()
-for i in range(len(route)):
-    print(route[i], ' => ', end='')
-print('\n', lenght)
+file = open("planned_route.txt", "w")
+file.write("Lenght: " + str(lenght) + '\n')
+for i in range(len(route) - 1):
+    file.write(str(route[i]) + ' => ')
+file.write(str(route[-1]))
+file.close()
