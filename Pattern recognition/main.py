@@ -1,6 +1,7 @@
 from time import time
 from texttable import Texttable
 
+
 def test(matrix):
     times = [len(matrix.get_matrix()[0])]
     start = time()
@@ -15,8 +16,8 @@ def test(matrix):
     times.append(float(len(result)))
     return times
 
-class Table:
 
+class Table:
     def __init__(self, path):
         file = open(path)
         self.matrix = [k.strip() for k in file]
@@ -38,7 +39,7 @@ class Table:
                             result.append((x, y))
         return result
 
-    def rabin_karp(self, pattern = 'ABC', d = 16, q = 13):
+    def rabin_karp(self, pattern='ABC', d=16, q=13):
         matrixlen = len(self.matrix)
         patternlen = len(pattern)
         h = (d ** (patternlen - 1)) % q
@@ -81,6 +82,6 @@ table.add_rows([["size", "naive_time", "naive_result", "rabin_karp_time", "rabin
                 [times[4][0], times[4][1], times[4][2], times[4][3], times[4][4]],
                 [times[5][0], times[5][1], times[5][2], times[5][3], times[5][4]]])
 
-f = open('results.txt', 'w')
+f = open('times.txt', 'w')
 f.write(table.draw())
 f.close()
