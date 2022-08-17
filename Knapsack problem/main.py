@@ -1,12 +1,11 @@
 from time import time
-from random import randint
 from random import shuffle
 
-size = 20
 
 def opening(path):
     with open(path, 'r') as file:
         return [line.strip().split(',') for line in file.readlines()[2:]]
+
 
 def exec_time(number):
     temp = opening("packages/packages" + str(number) + ".txt")
@@ -15,17 +14,21 @@ def exec_time(number):
     start = time()
     backpack.greedy_fill(items)
     stop = time()
-    print("wartość rzeczy w", number, "elementowym plecaku",backpack.value)
-    return stop - start
+    file = open(str(number) + "backpack.txt", "w")
+    file.write("Value of items in " + str(number) + " element bacpack: " + str(backpack.value) + '\n'
+                + "Execution time " + str(stop - start))
+    if number <= 200:
+        file.write("\nBackpack state:\n" + backpack.state())
+
 
 class Item:
     def __init__(self, id, width, height, value):
         self.id = id
         self.value = value
-        self.width = width if width >= height else height  # szerokosc bedzie wiekszym wymiarem
+        self.width = width if width >= height else height  # width should be bigger than height
         self.height = height if width >= height else width
-        self.size = self.width * self.height  # pole
-        self.ratio = self.value/self.size
+        self.size = self.width * self.height
+        self.ratio = self.value / self.size
 
     def get_item(self):
         return "<Item#{id}={value}: {x}x{y}>".format(id=self.id, x=self.width, y=self.height, value=self.value)
@@ -40,11 +43,11 @@ class Backpack:
         self.value = 0
         self.available = [list(range(self.height)) for k in range(self.width)]
 
-    def state(self):
+    def state(self):  # Returns current backpack state, line for returning value is turned off
         temp = ""
         for k in self.data:
             temp += "\n" + ("{:>4} " * self.width).format(*k)
-        temp += "\nValue: %d" % self.value
+        # temp += "\nValue: %d" % self.value
         return temp
 
     def try_insert(self, item):
@@ -87,7 +90,7 @@ class Backpack:
         for k in items_sorted:
             self.try_insert(k)
 
-    def ratio_fill(self, items, inserted = []):
+    def ratio_fill(self, items, inserted=[]):
         if len(inserted) == 0:
             items_sorted = sorted(items, key=lambda x: x.ratio, reverse=True)
             for k in items_sorted:
@@ -114,7 +117,9 @@ class Backpack:
         return [inserted, self.value]
 
 
-print('Czas dla 20 przedmiotow', exec_time(20))
-print('Czas dla 100 przedmiotow', exec_time(100))
-print('Czas dla 500 przedmiotow', exec_time(500))
-print('Czas dla 1000 przedmiotow', exec_time(1000))
+# Execution times
+
+exec_time(20)
+exec_time(100)
+exec_time(500)
+exec_time(1000)

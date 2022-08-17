@@ -1,0 +1,2 @@
+Value of items in 500 element bacpack: 60069
+Execution time 26.65016508102417

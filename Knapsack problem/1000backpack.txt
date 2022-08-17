@@ -1,0 +1,2 @@
+Value of items in 1000 element bacpack: 239242
+Execution time 304.83934807777405
